@@ -1,0 +1,110 @@
+{
+  "info": {
+    "name": "Task Management API",
+    "description": "API collection for testing the Task Management backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get All Tasks",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/tasks",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["tasks"]
+        }
+      }
+    },
+    {
+      "name": "Create a New Task",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"title\": \"Sample Task\", \"description\": \"This is a sample task description\"}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/tasks",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["tasks"]
+        }
+      }
+    },
+    {
+      "name": "Update Task Status",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"status\": true}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/tasks/{{taskId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["tasks", "{{taskId}}"]
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set(\"taskId\", \"1\"); // Replace with actual task ID"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Delete Task",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/tasks/{{taskId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["tasks", "{{taskId}}"]
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set(\"taskId\", \"1\"); // Replace with actual task ID"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "taskId",
+      "value": "1",
+      "type": "string"
+    }
+  ]
+}
